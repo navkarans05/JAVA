@@ -1,0 +1,39 @@
+package MyFirstPackage;
+import java.sql.*; 
+import java.util.*;
+public class example_jdbc {
+	public static void main(String [] args) throws Exception {
+		String url="jdbc:mysql://localhost:3306/caelius";
+		String uname="root";
+		String pass="";
+		String Query="select * from employee";
+		Scanner sc=new Scanner(System.in);
+		String e_name,e_state;
+		int e_id;
+		System.out.println("Enter Employee Name");
+		e_name=sc.nextLine();
+		System.out.println("Enter Employee State");
+		e_state=sc.nextLine();
+		System.out.println("Enter Employee Id");
+		e_id=sc.nextInt();
+		String IQuery="insert into employee(emp_name,emp_id,emp_state) values('"+e_name+"','"+e_id+"','"+e_state+"')";
+//		String UQuery="update employee set emp_name='DHILLON_UPD' where emp_id='999'";
+		//String DQuery="delete from employee where emp_id='999'";
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con=DriverManager.getConnection(url,uname,pass);
+		Statement st=con.createStatement();
+		st.executeUpdate(IQuery);
+		//st.executeUpdate(DQuery);
+		//st.executeUpdate(UQuery);
+		ResultSet rs=st.executeQuery(Query);
+		System.out.println("NAME"+"    |    "+"ID"+"    |    "+"STATE");
+		System.out.println("");
+		
+		while(rs.next()) {  
+			System.out.println(rs.getString(1)+"    |    "+rs.getString(2)+"    |    "+rs.getString(3)); 
+		}
+		con.close();
+		
+	}
+
+}
