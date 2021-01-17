@@ -1,0 +1,22 @@
+package MyFirstPackage;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+
+public class jdbc_delete {
+	public static void main(String [] args) throws Exception{
+		String url="jdbc:mysql://localhost:3306/gndu";
+		String uname="root";
+		String pass="";
+		String Query="delete from cet where p_id='113'";
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con=DriverManager.getConnection(url,uname,pass);
+        Statement st=con.createStatement();
+        st.executeUpdate(Query);
+        con.close();
+        System.out.println("Deleted Item from Database Successfully");
+	}
+
+
+}
