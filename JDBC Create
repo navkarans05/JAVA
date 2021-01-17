@@ -1,0 +1,25 @@
+package MyFirstPackage;
+import java.sql.*;
+import java.util.*;
+public class jdbc_gndu_create {
+	public static void main(String [] args) throws Exception{
+		String url="jdbc:mysql://localhost:3306/gndu";
+		String uname="root";
+		String pass="";
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Professor Name");
+		String p_name=sc.nextLine();
+		System.out.println("Enter Professor Subject");
+		String p_subject=sc.nextLine();
+		System.out.println("Enter Professor Id");
+		int p_id=sc.nextInt();
+	    String Query="insert into cet(p_name,p_id,p_subject) values('"+p_name+"','"+p_id+"','"+p_subject+"')";
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con=DriverManager.getConnection(url,uname,pass);
+        Statement st=con.createStatement();
+        st.executeUpdate(Query);
+        con.close();
+        System.out.println("Professor added to Database Successfully");
+	}
+
+}
